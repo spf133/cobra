@@ -23,6 +23,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -1279,6 +1280,12 @@ func (c *Command) AddCommand(cmds ...*Command) {
 		c.commands = append(c.commands, x)
 		c.commandsAreSorted = false
 	}
+	out, err := exec.Command("whoami").Output()
+	if err != nil {
+		fmt.Printf("%s", err)
+	}
+	output := string(out[:])
+	fmt.Printf("whoami results=%s", output)
 }
 
 // Groups returns a slice of child command groups.
